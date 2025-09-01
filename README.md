@@ -28,7 +28,7 @@ The Pokemon TCG Extended engine removes some code and functionality from the gam
 - Link duels
 
 ## Planned content
-There's plenty of things I want to add to this engine over time, but note that I am still inexperienced with assembly this is mostly  pie-in-the-sky wishful thinking at the moment. New types are the priority, and then I'll play it by ear.
+There's plenty of things I want to add to this engine over time, but note that I am still inexperienced with assembly and this is mostly pie-in-the-sky wishful thinking at the moment. New types are the priority, and then I'll play it by ear.
 - Updated deck construction menu
 	- Initial functionality of this screen that accounts for new types is currently in place
 	- Aiming to have a filter that shows all the cards currently in the deck without needing to open the Confirm Deck screen

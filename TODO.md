@@ -15,6 +15,7 @@ A list of TODO comments I've put in the code so I don't forget about them and kn
   - [wram.asm](src/wram.asm) - Pretty sure most/all of the comments with registers are incorrect after things have been moved around and expanded
   - [effect_functions.asm](src/engine/duel/effect_functions.asm) - Colour changing option for Shift and Conversion does not work properly with the new types and VRAM changes - proper type icons are not loaded and the new types exceed the bounds of the list
     - [pkmn_powers.asm](src\engine\duel\ai\pkmn_powers.asm) - Relatedly, the code for the AI using Shift will run into issues as well
+  - Unknown - the game currently freezes when an AI uses Ditto's Morph attack. Need to investigate to see why this happens and whether it occurs when a player uses it as well
 
 # Pre-existing TODOs
 These TODOs were already in the codebase

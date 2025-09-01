@@ -148,8 +148,8 @@ CalculateDamage_VersusDefendingPokemon:
 	call SwapTurn
 	call GetArenaCardWeakness
 	call SwapTurn
-	and b
-	jr z, .not_weak
+	cp b
+	jr nz, .not_weak
 	; double de
 	sla e
 	rl d
@@ -159,8 +159,8 @@ CalculateDamage_VersusDefendingPokemon:
 	call SwapTurn
 	call GetArenaCardResistance
 	call SwapTurn
-	and b
-	jr z, .not_resistant
+	cp b
+	jr nz, .not_resistant
 	ld hl, -30
 	add hl, de
 	ld e, l
@@ -378,8 +378,8 @@ CalculateDamage_FromDefendingPokemon:
 	call LoadCardDataToBuffer2_FromDeckIndex
 	ld a, [wLoadedCard2Weakness]
 .unchanged_weak
-	and b
-	jr z, .not_weak
+	cp b
+	jr nz, .not_weak
 	; double de
 	sla e
 	rl d
@@ -401,8 +401,8 @@ CalculateDamage_FromDefendingPokemon:
 	call LoadCardDataToBuffer2_FromDeckIndex
 	ld a, [wLoadedCard2Resistance]
 .unchanged_res
-	and b
-	jr z, .not_resistant
+	cp b
+	jr nz, .not_resistant
 	ld hl, -30
 	add hl, de
 	ld e, l

@@ -1863,8 +1863,8 @@ ApplyDamageModifiers_DamageToTarget::
 	call SwapTurn
 	call GetArenaCardWeakness
 	call SwapTurn
-	and b
-	jr z, .not_weak
+	cp b
+	jr nz, .not_weak
 	sla e
 	rl d
 	ld hl, wDamageEffectiveness
@@ -1873,8 +1873,8 @@ ApplyDamageModifiers_DamageToTarget::
 	call SwapTurn
 	call GetArenaCardResistance
 	call SwapTurn
-	and b
-	jr z, .check_pluspower_and_defender ; jump if not resistant
+	cp b
+	jr nz, .check_pluspower_and_defender ; jump if not resistant
 	ld hl, -30
 	add hl, de
 	ld e, l
@@ -1905,9 +1905,9 @@ TranslateColorToWR::
 	jr c, .got_color
 	cp NUM_COLORED_TYPES ; Fairy, Dragon
 	jr c, .valid_color
-	ld a, 0
-	pop hl
+	ld a, $FF
 	pop bc
+	pop hl
 	ret
 .valid_color
 	ld b, $80
@@ -1920,8 +1920,8 @@ TranslateColorToWR::
 	ld h, a
 	ld a, [hl]
 	or b
-	pop hl
 	pop bc
+	pop hl
 	ret
 
 InvertedPowersOf2::
@@ -1946,16 +1946,16 @@ ApplyDamageModifiers_DamageToSelf::
 	call TranslateColorToWR
 	ld b, a
 	call GetArenaCardWeakness
-	and b
-	jr z, .not_weak
+	cp b
+	jr nz, .not_weak
 	sla e
 	rl d
 	ld hl, wDamageEffectiveness
 	set WEAKNESS, [hl]
 .not_weak
 	call GetArenaCardResistance
-	and b
-	jr z, .not_resistant
+	cp b
+	jr nz, .not_resistant
 	ld hl, -30
 	add hl, de
 	ld e, l

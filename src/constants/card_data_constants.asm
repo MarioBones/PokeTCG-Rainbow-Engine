@@ -180,6 +180,7 @@ DEF STAGE2 EQU $02
 DEF STAGE2_WITHOUT_STAGE1 EQU $03
 
 ; CARD_DATA_WEAKNESS and CARD_DATA_RESISTANCE constants
+; Do not use $FF as a value as this is used to check Colorless values
 DEF WR_FIRE      EQU $80 ; 1000 0000
 DEF WR_GRASS     EQU $40 ; 0100 0000
 DEF WR_LIGHTNING EQU $20 ; 0010 0000
@@ -191,8 +192,7 @@ DEF WR_METAL	 EQU $01 ; 0000 0001
 DEF WR_FAIRY	 EQU $C0 ; 1100 0000
 DEF WR_DRAGON	 EQU $A0 ; 1010 0000
 ; Types beyond Metal add the reverse powers of 2 onto $80
-; This allows the weakness/resistance logic to remain more or less the same, adding
-; only one additional bitwise operation
+; This allows some of the weakness/resistance code to remain mostly the same
 
 ; CARD_DATA_ATTACK*_CATEGORY constants
 DEF DAMAGE_NORMAL EQU $00

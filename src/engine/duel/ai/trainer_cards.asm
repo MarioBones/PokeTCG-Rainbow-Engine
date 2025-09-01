@@ -720,9 +720,9 @@ AIDecide_Defender2:
 	call TranslateColorToWR
 	ld b, a
 	call GetArenaCardWeakness
-	and b
+	cp b
 	pop de
-	jr z, .check_resist
+	jr nz, .check_resist
 	sla d
 
 ; subtract 30 from recoil damage if card resists its own color.
@@ -733,9 +733,9 @@ AIDecide_Defender2:
 	call TranslateColorToWR
 	ld b, a
 	call GetArenaCardResistance
-	and b
+	cp b
 	pop de
-	jr z, .subtract
+	jr nz, .subtract
 	ld a, d
 	sub 30
 	jr c, .no_carry
@@ -1095,8 +1095,8 @@ AIDecide_GustOfWind:
 	call SwapTurn
 	call GetArenaCardWeakness
 	call SwapTurn
-	and b
-	jr nz, .no_carry
+	cp b
+	jr z, .no_carry
 
 ; check weakness
 	call .FindBenchCardWithWeakness
@@ -1208,8 +1208,8 @@ AIDecide_GustOfWind:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	call SwapTurn
 	ld a, [wLoadedCard1Weakness]
-	and b
-	jr nz, .check_can_damage
+	cp b
+	jr z, .check_can_damage
 	jr .loop_3
 
 ; returns carry if neither attack can deal damage

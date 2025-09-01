@@ -89,8 +89,8 @@ AIDecideWhetherToRetreat:
 	call TranslateColorToWR
 	ld b, a
 	ld a, [wAIPlayerResistance]
-	and b
-	jr z, .check_weakness_1
+	cp b
+	jr nz, .check_weakness_1
 	ld a, 1
 	call AIEncourage
 
@@ -108,8 +108,8 @@ AIDecideWhetherToRetreat:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld a, [wLoadedCard1Type]
 	call TranslateColorToWR
-	and b
-	jr nz, .loop_resistance_1
+	cp b
+	jr z, .loop_resistance_1
 	jr .check_weakness_1
 .exit_loop_resistance_1
 	ld a, 2
@@ -119,8 +119,8 @@ AIDecideWhetherToRetreat:
 	ld a, [wAIPlayerColor]
 	ld b, a
 	call GetArenaCardWeakness
-	and b
-	jr z, .check_resistance_2
+	cp b
+	jr nz, .check_resistance_2
 	ld a, 2
 	call AIEncourage
 
@@ -137,8 +137,8 @@ AIDecideWhetherToRetreat:
 	jr z, .exit_loop_weakness_1
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld a, [wLoadedCard1Weakness]
-	and b
-	jr nz, .loop_weakness_1
+	cp b
+	jr z, .loop_weakness_1
 	jr .check_resistance_2
 .exit_loop_weakness_1
 	ld a, 3
@@ -148,8 +148,8 @@ AIDecideWhetherToRetreat:
 	ld a, [wAIPlayerColor]
 	ld b, a
 	call GetArenaCardResistance
-	and b
-	jr z, .check_weakness_2
+	cp b
+	jr nz, .check_weakness_2
 	ld a, 3
 	call AIDiscourage
 
@@ -172,8 +172,8 @@ AIDecideWhetherToRetreat:
 	ld a, [wLoadedCard1Type]
 	call TranslateColorToWR
 	pop de
-	and b
-	jr z, .loop_weakness_2
+	cp b
+	jr nz, .loop_weakness_2
 	ld a, 2
 	call AIEncourage
 
@@ -198,8 +198,8 @@ AIDecideWhetherToRetreat:
 	call TranslateColorToWR
 	ld b, a
 	ld a, [wAIPlayerWeakness]
-	and b
-	jr z, .check_resistance_3
+	cp b
+	jr nz, .check_resistance_3
 	ld a, 3
 	call AIDiscourage
 
@@ -217,8 +217,8 @@ AIDecideWhetherToRetreat:
 	jr z, .check_ko_2
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld a, [wLoadedCard1Resistance]
-	and b
-	jr z, .loop_resistance_2
+	cp b
+	jr nz, .loop_resistance_2
 	ld a, 1
 	call AIEncourage
 

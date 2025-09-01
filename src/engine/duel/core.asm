@@ -4107,9 +4107,9 @@ PrintCardPageWeaknessesOrResistances:
 	push de
 	ld e, 0
 	cp $81
-	jr c, .skip_ahead
+	jr c, .skip_ahead ; For types above 8, we will ignore the 7th bit for the calculation loop and then increment the type by 7 later
 	ld e, 7
-	res 7,a
+	res 7, a
 .skip_ahead
 	ld d, a
 	xor a ; FIRE
