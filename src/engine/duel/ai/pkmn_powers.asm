@@ -622,8 +622,8 @@ HandleAIShift:
 	call SwapTurn
 	or a
 	ret z ; return if Defending Pokemon has no weakness
-	and b
-	ret nz ; return if Venomoth is already Defending card's weakness type
+	cp b
+	ret z ; return if Venomoth is already Defending card's weakness type
 
 ; check whether there's a card in play with
 ; the same color as the Player's card weakness
@@ -641,10 +641,14 @@ HandleAIShift:
 	bank1call AIMakeDecision
 
 ; converts WR_* to appropriate color
-	ld a, [wAIDefendingPokemonWeakness]
 	ld b, 0
+	ld a, [wAIDefendingPokemonWeakness]
+	cp $81
+	jr c, .loop_color ; For types above 8, we will ignore the 7th bit for the calculation loop and then increment the type by 7 later
+	ld b, 7
+	res 7, a
 .loop_color
-	bit 7, a ; TODO - update for more types
+	bit 7, a
 	jr nz, .done
 	inc b
 	rlca
@@ -667,18 +671,21 @@ HandleAIShift:
 	ld b, a
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
+	ld c, PLAY_AREA_ARENA
 .loop_play_area
 	ld a, [hli]
 	cp $ff
 	jr z, .false
 	push bc
-	call GetCardIDFromDeckIndex
-	call GetCardType ; bug, this could be a Trainer card
+	ld a, c
+	call GetPlayAreaCardColor
 	call TranslateColorToWR
 	pop bc
-	and b
-	jr z, .loop_play_area
-; true
+	cp b
+	jr z, .true
+	inc c
+	jr .loop_play_area
+.true
 	scf
 	ret
 .false
